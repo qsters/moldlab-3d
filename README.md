@@ -19,30 +19,33 @@ The 3D slime simulation is a 3d Version of the [MoldLagb](https://store.steampow
 To build and run this project, ensure the following libraries and tools are installed:
 
 - **OpenGL** (version 4.3 or higher)
-- **GLFW** (for window and input management)
 - A C++ compiler supporting C++17 or later
-- MUST be on a Windows computer, Mac's do not support OPenGL V4.3 for the compute shaders :(
+- **Linux + Windows supported**. macOS is not supported (no OpenGL 4.3 compute shader support).
+
+Notes:
+- This project uses CMake to automatically fetch/build **GLFW** during configuration.
+- You still need working GPU drivers that expose OpenGL 4.3+.
 
 ## Build Instructions
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/your-repository-url.git
-   cd 3D-Slime-Mold-Simulation
+   cd MoldLab3D_cpp
    ```
 
-2. **Install Dependencies**:
-    - Ensure all libraries mentioned in the dependencies section are installed.
-    - Include their headers and link the libraries during compilation.
-
-3. **Compile the Code**:
-   Use a build system like CMake or manually compile using the following command:
+2. **Configure**:
    ```bash
-   g++ -std=c++17 -o MoldLab3D GameEngine.cpp MoldLabGame.cpp -lglfw -lGL -ldl -lpthread
+   cmake -S . -B build
    ```
 
-4. **Run the Simulation**:
+3. **Build**:
    ```bash
-   ./MoldLab3D
+   cmake --build build
+   ```
+
+4. **Run**:
+   ```bash
+   ./build/MoldLab3D
    ```
 
 ## Usage
