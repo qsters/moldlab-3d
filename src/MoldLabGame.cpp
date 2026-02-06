@@ -214,8 +214,10 @@ void MoldLabGame::initializeSDFBuffer() {
 }
 
 
-void uploadSettingsBuffer(GLuint simulationSettingsBuffer, const SimulationData &settings) {
-    glGenBuffers(1, &simulationSettingsBuffer);
+void uploadSettingsBuffer(GLuint &simulationSettingsBuffer, const SimulationData &settings) {
+    if (simulationSettingsBuffer == 0) {
+        glGenBuffers(1, &simulationSettingsBuffer);
+    }
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, simulationSettingsBuffer);
     glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(SimulationData), &settings, GL_STATIC_DRAW);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, SIMULATION_BUFFER_LOCATION, simulationSettingsBuffer); // Binding index 2 for settings

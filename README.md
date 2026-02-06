@@ -25,6 +25,7 @@ To build and run this project, ensure the following libraries and tools are inst
 Notes:
 - This project uses CMake to automatically fetch/build **GLFW** during configuration.
 - You still need working GPU drivers that expose OpenGL 4.3+.
+- On Linux, the app forces the GLFW X11 backend to avoid Wayland loader issues. Ensure X11 or XWayland is installed.
 
 ## Build Instructions
 1. **Clone the Repository**:
@@ -84,4 +85,3 @@ Eclipse Public License - v 2.0 -- See LICENSE file
 ## Acknowledgments
 Special thanks to:
 - The creators of GLFW, GLAD, and ImGui for their open-source contributions.
-

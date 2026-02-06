@@ -313,6 +313,11 @@ void GameEngine::CheckProgramLinking(const GLuint program) {
 void GameEngine::initGLFW() {
     glfwSetErrorCallback(errorCallback);
 
+#if defined(__linux__) && defined(GLFW_PLATFORM) && defined(GLFW_PLATFORM_X11)
+    // Force X11 on Linux to avoid Wayland/EGL loader mismatches.
+    glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_X11);
+#endif
+
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW" << std::endl;
         exit(EXIT_FAILURE);
@@ -334,7 +339,10 @@ void GameEngine::initGLFW() {
     glfwSetKeyCallback(window, keyCallback);
 
     glfwMakeContextCurrent(window);
-    gladLoadGL();
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        std::cerr << "Failed to initialize OpenGL loader (glad)." << std::endl;
+        exit(EXIT_FAILURE);
+    }
     glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
     SetVsyncStatus(vSyncEnabled);
 }
@@ -382,6 +390,10 @@ float GameEngine::TimeSinceStart() const {
 
 void GameEngine::ComputeShaderInitializationAndCheck() {
     const GLubyte* version = glGetString(GL_VERSION);
+    if (!version) {
+        std::cerr << "Failed to query OpenGL version (no current context or driver error)." << std::endl;
+        exit(EXIT_FAILURE);
+    }
     std::cout << "OpenGL Version: " << version << std::endl;
 
     if (GLVersion.major >= 4 && GLVersion.minor >= 3) {
