@@ -15,7 +15,6 @@ target_sources(MoldLab3D
     src/GameEngine.cpp
     src/MoldLabGame.cpp
     src/InputManager.cpp
-    src/ShaderVariable.cpp
     src/glad.c
 
     # ImGui sources (vendored)

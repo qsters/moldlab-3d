@@ -274,8 +274,8 @@ void MoldLabGame::HandleCameraMovement(const float orbitRadius, const float delt
     if (horizontalAngle > 360.0f) horizontalAngle -= 360.0f;
     if (horizontalAngle < 0.0f) horizontalAngle += 360.0f;
     // Convert angles to radians
-    float azimuth = horizontalAngle * static_cast<float>(M_PI) / 180.0f; // Azimuth in radians
-    float altitude = verticalAngle * static_cast<float>(M_PI) / 180.0f; // Altitude in radians
+    float azimuth = horizontalAngle * SimulationDefaults::PI / 180.0f; // Azimuth in radians
+    float altitude = verticalAngle * SimulationDefaults::PI / 180.0f; // Altitude in radians
 
     // Compute camera position in spherical coordinates relative to the origin
     float x = orbitRadius * cos(altitude) * sin(azimuth);
@@ -530,7 +530,7 @@ void MoldLabGame::renderUI() {
     SliderFloatWithTooltip("Turn Speed", "##TurnSpeedSlider", &simulationSettings.turn_speed, 0.0f, 5.0f, "Turn speed of spores. Rotations per second.");
     SliderFloatWithTooltip("Decay Speed", "##DecaySpeedSlider", &simulationSettings.decay_speed, 0.0f, 10.0f, "Decay speed of spores. 1/x seconds to fully decay.");
     SliderFloatWithTooltip("Sensor Distance", "##SensorDistanceSlider", &simulationSettings.sensor_distance, 0.0f, static_cast<float>(simulationSettings.grid_size) / 2.0f, "Sets the distance that the spore can see. In Voxels.");
-    SliderFloatWithTooltip("Sensor Angle", "##SensorAngleSlider", &simulationSettings.sensor_angle, 0.0f, M_PI, "Sets the angle that the spores see. In Radians. 0 is directly on the forward sensor, PI being directly behind it.");
+    SliderFloatWithTooltip("Sensor Angle", "##SensorAngleSlider", &simulationSettings.sensor_angle, 0.0f, SimulationDefaults::PI, "Sets the angle that the spores see. In Radians. 0 is directly on the forward sensor, PI being directly behind it.");
 
     ImGui::Spacing();
     ImGui::Separator();

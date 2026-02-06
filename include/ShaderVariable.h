@@ -4,6 +4,7 @@
 #include <glad/glad.h>
 #include <linmath.h>
 #include <iostream>
+#include <string>
 #include <utility>
 
 // Template class to store a generic variable and its corresponding shader location
@@ -63,17 +64,25 @@ private:
 };
 
 
-// Declare template specializations here
+// Template specializations for supported types (header-only so they link on all platforms/toolchains)
 template <>
-void ShaderVariable<vec2>::upload() const;
+inline void ShaderVariable<vec2>::upload() const {
+    glUniform2f(location, (*value)[0], (*value)[1]);
+}
 
 template <>
-void ShaderVariable<vec3>::upload() const;
+inline void ShaderVariable<vec3>::upload() const {
+    glUniform3f(location, (*value)[0], (*value)[1], (*value)[2]);
+}
 
 template <>
-void ShaderVariable<float>::upload() const;
+inline void ShaderVariable<float>::upload() const {
+    glUniform1f(location, *value);
+}
 
 template <>
-void ShaderVariable<int>::upload() const;
+inline void ShaderVariable<int>::upload() const {
+    glUniform1i(location, *value);
+}
 
 #endif // SHADER_VARIABLE_H
