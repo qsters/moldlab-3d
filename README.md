@@ -1,19 +1,22 @@
-# 3D Slime Mold Simulation
+# MoldLab 3D
 
-## Project Overview
-The 3D slime simulation is a 3d Version of the [MoldLab](https://store.steampowered.com/app/2454710/MoldLab/), a game I released on steam. An emergent behavior agent based simulation. Inspired by [Sebastian Lagues video](https://www.youtube.com/watch?v=X-iSQQgOd1A).
+A real-time 3D emergent-behavior simulation built in **C++17** and **OpenGL 4.3+**. The simulation runs on the GPU via **compute shaders**, and the scene is visualized with a **ray-marched renderer** accelerated by a coarse **Jump Flood Algorithm (JFA)** distance field.
+
+
+This is a 3D re-imagnining of my game: [MoldLab](https://store.steampowered.com/app/2454710/MoldLab/).
 
 ![BurstingSporesGif](gifs/BurstingSpores.gif)
 
-## Features
-- **Ray-Marched Rendering**: High-quality visualizations of slime mold behavior using ray-marching techniques. Both tranparent and opaque.
+> Platform note: **Linux + Windows** supported. **macOS not supported** (OpenGL 4.3 compute shaders).
+
+## Technical Highlights
+- **Ray-Marched Rendering**: High-quality rendering of the slime-mold behavior using ray-marching on the GPU. The CPU primarily updates the settings struct and dispatches the compute workloads. Works with both tranparent and opaque rendering:
 ![TransparencyDisplay](gifs/TransparencyDisplay.gif)
 - **Custom Game Engine**: Fully implemented engine with core features like input handling, shader management, and rendering pipeline.
-- **Optimized SDF Generation**: I implemented a novel (I think?) way to optimize ray marching using the Jump Flood Algorithm for low detailed SDF Generation
-- **3D Interactive Environment**: Explore and observe slime mold behaviors in a 3D space.
+- **Optimized SDF Generation**: I implemented a novel way to optimize ray marching in 3d by using the Jump Flood Algorithm for low detailed SDF Generation. Which reduces the expensive local sampling in the marching.
 - **Dynamic Simulation Parameters**: Real-time adjustment of variables such as spore count, grid size, and spore behavior via an intuitive ImGui-based interface.
 ![DynamicMovement](gifs/DynamicMovement.gif)
-- **Compute Shader Utilization**: Efficient simulation leveraging OpenGL compute shaders.
+- **Shader “header injection”:** simulation structs are shared between C++ and GLSL by injecting definitions (e.g. `SimulationData`, `Spore`) into shaders at compile time.
 
 ## Dependencies
 To build and run this project, ensure the following libraries and tools are installed:
