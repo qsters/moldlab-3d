@@ -19,38 +19,26 @@ This is a 3D re-imagnining of my game: [MoldLab](https://store.steampowered.com/
 - **Shader “header injection”:** simulation structs are shared between C++ and GLSL by injecting definitions (e.g. `SimulationData`, `Spore`) into shaders at compile time.
 
 ## Dependencies
-To build and run this project, ensure the following libraries and tools are installed:
+- OpenGL **4.3+** (compute shaders, `#version 430`)
+- C++17 compiler
+- CMake **3.15+**
+- GPU drivers exposing OpenGL 4.3+
 
-- **OpenGL** (version 4.3 or higher)
-- A C++ compiler supporting C++17 or later
-- **Linux + Windows supported**. macOS is not supported (no OpenGL 4.3 compute shader support).
+
+## Build Instructions
+```bash
+git clone https://github.com/qsters/moldlab-3d.git
+cd moldlab-3d
+
+cmake -S . -B build
+cmake --build build
+./build/MoldLab3D
+```
 
 Notes:
 - This project uses CMake to automatically fetch/build **GLFW** during configuration.
 - You still need working GPU drivers that expose OpenGL 4.3+.
 - On Linux, the app forces the GLFW X11 backend to avoid Wayland loader issues. Ensure X11 or XWayland is installed.
-
-## Build Instructions
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-repository-url.git
-   cd MoldLab3D_cpp
-   ```
-
-2. **Configure**:
-   ```bash
-   cmake -S . -B build
-   ```
-
-3. **Build**:
-   ```bash
-   cmake --build build
-   ```
-
-4. **Run**:
-   ```bash
-   ./build/MoldLab3D
-   ```
 
 ## Usage
 - **Camera Controls**:
@@ -81,10 +69,7 @@ Notes:
 - `jump_flood_step.glsl` steps through the Jump Flood Algorithm.
 
 
-## License
-Eclipse Public License - v 2.0 -- See LICENSE file
-
-
-## Acknowledgments
-Special thanks to:
-- The creators of GLFW, GLAD, and ImGui for their open-source contributions.
+## LicenseNotes:
+- This project uses CMake to automatically fetch/build **GLFW** during configuration.
+- You still need working GPU drivers that expose OpenGL 4.3+.
+- On Linux, the app forces the GLFW X11 backend to avoid Wayland loader issues. Ensure X11 or XWayland is installed.
