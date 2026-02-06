@@ -26,6 +26,8 @@ This is a 3D re-imagnining of my game: [MoldLab](https://store.steampowered.com/
 
 
 ## Build Instructions
+
+### Linux
 ```bash
 git clone https://github.com/qsters/moldlab-3d.git
 cd moldlab-3d
@@ -33,6 +35,16 @@ cd moldlab-3d
 cmake -S . -B build
 cmake --build build
 ./build/MoldLab3D
+```
+
+### Windows
+```powershell
+git clone https://github.com/qsters/moldlab-3d.git
+cd moldlab-3d
+
+cmake -S . -B build
+cmake --build build
+.\build\Debug\MoldLab3D.exe
 ```
 
 Notes:
